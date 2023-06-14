@@ -11,7 +11,11 @@ def merge_pdf(files, output_name):
     merger = PdfMerger()
     
     for file in files:
-        merger.append(file)
+        try:
+            merger.append(file)
+        except Exception as e:
+            print(f"Error merging file: {file}")
+            raise e
 
     merger.write(output_name)
     merger.close()
